@@ -1,0 +1,19 @@
+tests/test_concurrent_page_extraction.rs
+  s_1351b6b9d80f89::t_8412c6ab3e4704 1-159
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "c844a8498c80ac21f2155fdeeaeae9c9c01d28be",
+  "prompts": {},
+  "sessions": {
+    "s_1351b6b9d80f89": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "212bddc9-3623-43b0-9752-fc77edffbc53",
+        "model": "unknown"
+      },
+      "human_author": "Matt Davis <mattdavis@cloudflare.com>"
+    }
+  }
+}
