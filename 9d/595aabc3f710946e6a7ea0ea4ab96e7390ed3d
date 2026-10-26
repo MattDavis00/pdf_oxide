@@ -1,0 +1,19 @@
+src/document.rs
+  s_00cfb7a1b08de2::t_58d2209e354709 25362-25364
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "9d595aabc3f710946e6a7ea0ea4ab96e7390ed3d",
+  "prompts": {},
+  "sessions": {
+    "s_00cfb7a1b08de2": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "3be20b75-d005-47c2-8bfe-9b1e04a7e35b",
+        "model": "unknown"
+      },
+      "human_author": "Matt Davis <mattdavis@cloudflare.com>"
+    }
+  }
+}
