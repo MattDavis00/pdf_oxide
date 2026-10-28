@@ -1,0 +1,21 @@
+src/fonts/cmap.rs
+  s_8e5b88e1e6065e::t_f231f006f60696 783-786
+  s_8e5b88e1e6065e::t_eeed90dac52b30 912-915
+  s_8e5b88e1e6065e::t_dbe22f2c12301c 916
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "bd5b11343cdc2d28cf1f611cc9d912404c1304e1",
+  "prompts": {},
+  "sessions": {
+    "s_8e5b88e1e6065e": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "99adf7da-6ddb-4792-8824-3d9dab2644bf",
+        "model": "unknown"
+      },
+      "human_author": "Matt Davis <mattdavis@cloudflare.com>"
+    }
+  }
+}
