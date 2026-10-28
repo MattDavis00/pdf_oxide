@@ -780,6 +780,10 @@ fn parse_bfchar_line(line: &str) -> Vec<(u32, String)> {
                 escape
             } else {
                 let dst_hex = dst_str.replace(char::is_whitespace, "");
+                // Byte-offset slicing below is only sound on pure-ASCII hex.
+                if !dst_hex.bytes().all(|b| b.is_ascii_hexdigit()) {
+                    return None;
+                }
 
                 if dst_hex.len() <= 4 {
                     let dst_code = u32::from_str_radix(&dst_hex, 16).ok()?;
@@ -904,6 +908,11 @@ fn parse_bfrange_line(line: &str) -> Option<Vec<(u32, String)>> {
 
         for (i, dst_hex) in dst_hexes.iter().take(range_size).enumerate() {
             let src = start + i as u32;
+
+            // Byte-offset slicing below is only sound on pure-ASCII hex.
+            if !dst_hex.bytes().all(|b| b.is_ascii_hexdigit()) {
+                continue;
+            }
 
             // Parse destination - could be one Unicode code point, UTF-16 surrogate, or multiple (ligature)
             let dst = if dst_hex.len() <= 4 {
