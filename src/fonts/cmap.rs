@@ -1203,6 +1203,32 @@ mod tests {
         assert!(parse_bfrange_line("invalid").is_none());
     }
 
+    // A non-UTF-8 byte inside a long destination hex string decodes lossily to
+    // the 3-byte U+FFFD, so 4-byte chunking lands inside a multi-byte char.
+    #[test]
+    fn test_bfchar_long_dst_with_invalid_utf8_byte() {
+        let data = b"beginbfchar\n<0001> <0041004\xFF42>\n<0002> <0043>\nendbfchar";
+        let cmap = parse_tounicode_cmap(data).unwrap();
+        assert_eq!(cmap.get(&0x01), None, "non-hex destination must be rejected");
+        assert_eq!(cmap.get(&0x02).as_deref(), Some("C"));
+    }
+
+    #[test]
+    fn test_bfchar_long_dst_with_multibyte_utf8_char() {
+        let data = "beginbfchar\n<0001> <0041004é42>\n<0002> <0043>\nendbfchar";
+        let cmap = parse_tounicode_cmap(data.as_bytes()).unwrap();
+        assert_eq!(cmap.get(&0x01), None, "non-hex destination must be rejected");
+        assert_eq!(cmap.get(&0x02).as_deref(), Some("C"));
+    }
+
+    #[test]
+    fn test_bfrange_array_long_dst_with_invalid_utf8_byte() {
+        let data = b"beginbfrange\n<0001> <0002> [<0041004\xFF42> <0043>]\nendbfrange";
+        let cmap = parse_tounicode_cmap(data).unwrap();
+        assert_eq!(cmap.get(&0x01), None, "non-hex destination must be rejected");
+        assert_eq!(cmap.get(&0x02).as_deref(), Some("C"));
+    }
+
     #[test]
     fn test_extract_sections() {
         let content =
