@@ -2,6 +2,12 @@
 
 All notable changes to PDFOxide are documented here.
 
+## [Unreleased]
+
+### Fixed
+
+- **A ruling placed far up a page made `extract_text` allocate up to a gigabyte for a small ruled table** — on an untagged page, each table cell is indexed into 18 pt y-bands so a span is tested only against nearby cells, and a cell was indexed over every band its bbox crossed. One ruling at y = 10⁸ made the upper row's cells about 5.5 million bands tall, so a two-column table took about 500 MiB of peak heap, and a four-column table with a ruling at y = 2 × 10⁸ and a span beside it about 1 GiB. Cells are now indexed only over bands some span actually probes, and the bands coarsen when spans and rulings are far apart. The same pages now peak at about 23 KB and 7.3 MiB respectively, and the first extracts the same text as with a normal-height top row (#3112).
+
 ## [0.3.78] - 2026-09-09
 
 > Correctness under audit: 144 defects across rendering, text, reading order, files and colour
